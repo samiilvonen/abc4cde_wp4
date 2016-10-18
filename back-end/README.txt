@@ -1,0 +1,1 @@
+One solution for the back-end part of the prototype is an R-package that contains functions which collect metadata from data files (netCDF - over OpenDap/Thredds?) and organise them in a database. Also, it should contain scripts which perform EQC and stores the results in the database.
