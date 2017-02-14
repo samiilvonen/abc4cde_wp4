@@ -1,3 +1,4 @@
+## ABC4CDE/DEMC - R-script for prototype tool WP4
 ## Rasmus Benestad. Blindern, Oslo 2016-10-17
 
 ## A cloolection of R-scripts which will be used in a prototype tool that runs regularly in the background
@@ -71,4 +72,13 @@ ECQ.ensemble <- function(obs=c('air.mon.mean.nc','ETAINT_t2m.mon.nc','MERRA'),
   ## first dimension is expected to follow a uniform distribution if the GCMs and reanalysis
   ## belong to the same population.
   testmap <- apply(X,1,testrank,m,N,d[1])
+}
+
+
+EQC.stations <- function() {
+  ## wilcox.test for assessment against station values
+} 
+
+EQC.commonEOF <- function() {
+  ## For visualisation and assessment/comparison of spatio-temporal covariance structure
 }
