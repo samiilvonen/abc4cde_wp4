@@ -1,10 +1,10 @@
 \name{getGCMs}
 \alias{getGCMs}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
+\title{GCM metadata
 %%  ~~function to do ... ~~
 }
-\description{
+\description{A function that extracts metadata  stored in netCDF files (CF-convention) with global climate model (GCM) results - CMIP results.
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
@@ -12,10 +12,10 @@ getGCMs(select = 1:3, varid = "tas")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{select}{
+  \item{select}{Number of files with GCM results to extract
 %%     ~~Describe \code{select} here~~
 }
-  \item{varid}{
+  \item{varid}{The variable ID to extract
 %%     ~~Describe \code{varid} here~~
 }
 }
@@ -33,6 +33,7 @@ getGCMs(select = 1:3, varid = "tas")
 %% ~put references to the literature/web site here ~
 }
 \author{
+Rasmus.Benestad-at-met.no
 %%  ~~who you are~~
 }
 \note{
@@ -42,6 +43,7 @@ getGCMs(select = 1:3, varid = "tas")
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
+\code{\link{metaxtract}} and \code{\link{getRCM}}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{

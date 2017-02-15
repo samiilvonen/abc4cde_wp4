@@ -24,6 +24,7 @@ getCM <- function(url='https://climexp.knmi.nl/CMIP5/monthly/tas/tas_Amon_ACCESS
   cid <- getatt(destfile)
   ## Extract a time series for the area mean for 
   cid$area.mean <- aggregate.area(X,FUN='mean')
+  cid$url <- url
   return(cid)
 }
 
@@ -31,9 +32,24 @@ getCM <- function(url='https://climexp.knmi.nl/CMIP5/monthly/tas/tas_Amon_ACCESS
 getGCMs <- function(select=1:3,varid='tas') {
   ## Get the urls
   url <- cmip5.download(varid=varid)[select]
-  ## Set up a list variable to contain all the metadata
+  ## Set up a list variable to contain all the metadata in sub-lists.
   X <- list()
   for (i in select) X[[as.character(i)]] <- getCM(url=url[i])
+  return(X)
+}
+
+testGCM <- function(select=1:3,varid='tas',path='~/storeB/CMIP5.monthly/rcp45/') {
+  fnames <- list.files(path=path,pattern=varid,full.names = TRUE)
+  X <- list()
+  for (i in select) {
+    print(fnames[i])
+    x <- retrieve(fnames[i],varid=varid)
+    ncid <- nc_open(fnames[i])
+    nc_close(ncid)
+    ncid$area.mean <- aggregate.area(x,FUN='mean')
+    ncid$url <- fnames[i]
+    X[[as.character(i)]] <- ncid
+  }
   return(X)
 }
 
@@ -48,4 +64,6 @@ getRCMs <- function(select=1:3,varid='tas') {
   for (i in select) X[[as.character(i)]] <- getCM(url=url[i])
   return(X)
 }
+
+
 
