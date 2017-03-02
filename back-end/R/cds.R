@@ -15,9 +15,10 @@ getatt <- function(fname) {
 }
 
 ## Generic function to retrieve climate model (CM) file from the KNMI ClimateExplorer
-getCM <- function(url='https://climexp.knmi.nl/CMIP5/monthly/tas/tas_Amon_ACCESS1-0_historical_000.nc',destfile='CM.nc',lon=NULL,lat=NULL) {
+getCM <- function(url='https://climexp.knmi.nl/CMIP5/monthly/tas/tas_Amon_ACCESS1-0_historical_000.nc',
+                  destfile='CM.nc',lon=NULL,lat=NULL,force=FALSE) {
   ## Retrieves the data 
-  lok <- try(download.file(url=url,destfile = destfile))
+  if (!file.exists(destfile)|force) lok <- try(download.file(url=url,destfile = destfile)) 
   if (inherits(loc,"try-error")) return()
   X <- retrieve(destfile,lon=lon,lat=lat)
   ## Collect information stored in the netCDF header
@@ -29,12 +30,12 @@ getCM <- function(url='https://climexp.knmi.nl/CMIP5/monthly/tas/tas_Amon_ACCESS
 }
 
 ## Specific function to retrieve GCMs
-getGCMs <- function(select=1:3,varid='tas') {
+getGCMs <- function(select=1:3,varid='tas',destfile=rep('CM.nc',3)) {
   ## Get the urls
-  url <- cmip5.download(varid=varid)[select]
+  url <- cmip5.urls(varid=varid)[select] ## Get the URLs of the 
   ## Set up a list variable to contain all the metadata in sub-lists.
   X <- list()
-  for (i in select) X[[as.character(i)]] <- getCM(url=url[i])
+  for (i in select) X[[as.character(i)]] <- getCM(url=url[i],destfile=destfile[i])
   return(X)
 }
 
@@ -55,15 +56,29 @@ testGCM <- function(select=1:3,varid='tas',path='~/storeB/CMIP5.monthly/rcp45/')
 
 
 ## Specific model to retrieve RCMs
-getRCMs <- function(select=1:3,varid='tas') {
+getRCMs <- function(select=1:3,varid='tas',destfile=rep('CM.nc',3)) {
   ## Get the urls
   url <- paste('https://climexp.knmi.nl/CORDEX/EUR-44/mon/',varid,'/',varid,'_EUR-44_cordex_rcp45_mon_00',select,'.nc',sep='')
   url <- sub('0000','000',url)
   ## Set up a list variable to contain all the metadata
   X <- list()
-  for (i in select) X[[as.character(i)]] <- getCM(url=url[i])
+  for (i in select) X[[as.character(i)]] <- getCM(url=url[i],destfile=destfile[i])
   return(X)
 }
 
-
+commonEOFS.gcm <- function(select=1:3,varid='tas',destfile=paste(rep('CM',3),1:3,'.nc',sep=''),it=NULL,is=NULL) {
+  getGCMs(select=select,varid=varid,destfile=destfile)
+  X <- NULL
+  for (fname in destfile) {
+    x <- retrieve(fname)
+    if (!is.null(it)) {
+      if (tolower(it)=='annual') x <- annual(x) else
+                                 x <- subset(x,it=it,is=is)
+    }
+    if (is.null(X)) X <- x else X <- combine(X,x)
+  }
+  ceof <- EOF(X)
+  plot(ceof)
+  save(ceof,file='ceof.gcm.rda')
+}
 

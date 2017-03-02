@@ -9,11 +9,11 @@
 ## last updates         2016-09-27
 ## revised              rasmus.benestad@met.no 2017-02-14
 
-cmip5.download <- function(experiment='rcp45',varid='tas',
+cmip5.urls <- function(experiment='rcp45',varid='tas',
                            url="http://climexp.knmi.nl/CMIP5/monthly/", 
                            path=NULL,off=FALSE,force=FALSE,verbose=FALSE) {
   urlfiles <- "NA"
-  if(verbose) print("cmip5.download")
+  if(verbose) print("cmip5.urls")
   if(is.null(path)) path <- getwd()
   for (iexp in experiment) {
     if(verbose) print(iexp)

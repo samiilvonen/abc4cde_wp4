@@ -1,4 +1,4 @@
-## ABC4CDE/DEMC - R-script for prototype tool WP4
+## ABC4CDE/DEMC - R-script for prototype tool WP4 Evaluation and Quality Control (EQC)
 ## Rasmus Benestad. Blindern, Oslo 2016-10-17
 
 ## A cloolection of R-scripts which will be used in a prototype tool that runs regularly in the background

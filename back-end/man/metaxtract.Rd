@@ -1,10 +1,10 @@
 \name{metaxtract}
 \alias{metaxtract}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{Metadata extraction from netCDF files
+\title{
 %%  ~~function to do ... ~~
 }
-\description{This function takes information stored in lists and sub-list structure obtained from \code{\link{getGCM}} and \code{\link{getRCM}} and stores it in a matrix/table format.
+\description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
@@ -12,14 +12,14 @@ metaxtract(x)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{list object containing one list-object for each GCM/RCM, each containing the netCDF header information. 
+  \item{x}{
 %%     ~~Describe \code{x} here~~
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
-\value{A matrix containing text.
+\value{
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
@@ -30,7 +30,6 @@ metaxtract(x)
 %% ~put references to the literature/web site here ~
 }
 \author{
-Rasmus.Benestad-at-met.no
 %%  ~~who you are~~
 }
 \note{
@@ -40,7 +39,6 @@ Rasmus.Benestad-at-met.no
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{getGCM}} and \code{\link{getRCM}}
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
@@ -81,5 +79,5 @@ function (x)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~metadata }% use one of  RShowDoc("KEYWORDS")
-\keyword{ ~model-data }% __ONLY ONE__ keyword per line
+\keyword{ ~kwd1 }% use one of  RShowDoc("KEYWORDS")
+\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
